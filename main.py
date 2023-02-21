@@ -2,17 +2,23 @@ from fpdf import FPDF as fp
 import glob
 from pathlib import Path
 
+
 pdf = fp(orientation='P', unit='mm', format='A4')
 
-gb = glob.glob("Text+Files/*.txt")
+gb = glob.glob("files/*.txt")
 
 for files in gb:
     pdf.add_page()
 
     filenames = Path(files).stem
-    filepath = filenames.split("/")[0]
     pdf.set_font(family="Times", style='B', size=24)
-    pdf.set_text_color(100, 100, 100)
-    pdf.cell(w=0, h=12, txt=f"{filepath.capitalize()}", align='L', ln=1)
+    pdf.cell(w=50, h=12, txt=f"{filenames.capitalize()}", ln=1)
+
+    with open(files, 'r') as file:
+        line = file.read()
+
+    pdf.set_font(family="Times", size=15)
+    pdf.cell(w=0, h=8, txt=line)
+
 
 pdf.output("animal.pdf")
