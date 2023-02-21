@@ -18,7 +18,7 @@ for files in gb:
         line = file.read()
 
     pdf.set_font(family="Times", size=15)
-    pdf.cell(w=0, h=8, txt=line)
+    pdf.multi_cell(w=0, h=8, txt=line)
 
 
 pdf.output("animal.pdf")
